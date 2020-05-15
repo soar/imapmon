@@ -1,0 +1,79 @@
+name: 🐍 CI pipeline
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: '7 1 * * 0'
+
+jobs:
+
+  lint:
+    name: Linters and checkers
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'schedule' }}
+
+    strategy:
+      matrix:
+        python_version: [3.7, 3.8, pypy3]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Set up Python
+        uses: actions/setup-python@master
+        with:
+          python-version: ${{ matrix.python_version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip pipenv setuptools
+          python -m pipenv install --system --deploy --dev
+
+      - name: Run prospector
+        run: >-
+          prospector
+          --with-tool pyroma
+          --with-tool vulture
+          --with-tool mypy
+
+  publish-package:
+    name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'schedule' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@master
+        with:
+          python-version: 3.7
+
+      # TODO: add `pyproject.toml` according to PEP 517/PEP 518
+      # - name: Install pep517
+      #   run: python -m pip install pep517 --user
+      # - name: Build a binary wheel and a source tarball
+      #   run: python -m pep517.build --source --binary --out-dir dist/ .
+
+      - name: Install requirements
+        run: python -m pip install --upgrade --user setuptools wheel twine
+
+      - name: Bump version
+        run: sed -i "$ s/$/.${GITHUB_RUN_NUMBER}/" version.txt
+
+      - name: Prepare packages
+        run: python setup.py sdist bdist_wheel
+
+      - name: Publish distribution 📦 to Test PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.test_pypi_password }}
+          repository_url: https://test.pypi.org/legacy/
+
+      - name: Publish distribution 📦 to PyPI
+        if: startsWith(github.event.ref, 'refs/tags')
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.pypi_password }}
