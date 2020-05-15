@@ -12,6 +12,10 @@ load_dotenv(find_dotenv(usecwd=True), verbose=True)
 
 @click.command(help='IMAP Monitor Tool')
 @click.option('--host', '-h', help='IMAP server hostname')
-def run(*args, **kwargs):
+def run(**kwargs):
     for k, v in kwargs.items():
         print(f'k: {k}, v: {v}')
+
+
+if __name__ == '__main__':
+    run()

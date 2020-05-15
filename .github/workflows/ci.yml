@@ -31,16 +31,14 @@ jobs:
           python -m pipenv install --system --deploy --dev
 
       - name: Run prospector
-        run: >-
-          prospector
-          --with-tool pyroma
-          --with-tool vulture
-          --with-tool mypy
+        run: prospector
 
   publish-package:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'schedule' }}
+    needs:
+      - lint
 
     steps:
       - name: Checkout

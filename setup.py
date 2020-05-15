@@ -20,16 +20,20 @@ setup(
     description='Tool for monitoring IMAP mailboxes and retransmitting received emails via alternative channels',
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
+    keywords=['imap', 'telegram'],
     entry_points={
         'console_scripts': [
-            'update = imapmon.scripts.imapmon:run'
+            'update = imapmon.scripts.run:run'
         ]
     },
     classifiers=[
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
 )

@@ -1,0 +1,19 @@
+strictness: medium
+test-warnings: true
+doc-warnings: false
+
+inherits:
+  - strictness_medium
+  - full_pep8
+
+ignore-paths:
+  - .github
+
+mypy:
+  run: true
+
+pyroma:
+  run: true
+
+vulture:
+  run: true
