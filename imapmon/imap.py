@@ -5,7 +5,7 @@ from click import BadOptionUsage
 from imap_tools import MailBox, Q
 
 from imapmon.channels.base import BaseChannel
-from imapmon.channels.telegram import TelegramChannel
+from imapmon.channels.tg import TelegramChannel
 from imapmon.settings import Settings
 
 
