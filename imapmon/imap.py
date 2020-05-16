@@ -25,13 +25,14 @@ class IMAPClient:
 
         self.channels: typing.Dict[str, BaseChannel] = {}
         for channel_name in settings.channels:
-            try:
-                self.channels[channel_name] = self.CHANNELS.get(channel_name)(settings)  # noqa
-            except TypeError:
+            channel_class = self.CHANNELS.get(channel_name)
+            if channel_class:
+                self.channels[channel_name] = channel_class(settings)
+            else:
                 raise BadOptionUsage('channel', f'Channel {channel_name} is not defined')
 
     def update(self):
         for msg in self.mailbox.fetch(Q(seen=False)):
             logger.info('Found new message with ID: %s', msg.uid)
-            for channel_name, channel in self.channels.items():
+            for _, channel in self.channels.items():
                 channel.message(msg)

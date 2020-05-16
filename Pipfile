@@ -10,6 +10,9 @@ pyflakes = "*"
 [packages]
 click = "*"
 python-dotenv = "*"
+python-telegram-bot = "*"
+beautifulsoup4 = "*"
+imap-tools = "*"
 
 [requires]
 python_version = "3.7"
