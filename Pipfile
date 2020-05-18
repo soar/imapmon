@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 prospector = {extras = ["with_everything"],version = "*"}
 pyflakes = "*"
+logging-tree = "*"
 
 [packages]
 click = "*"

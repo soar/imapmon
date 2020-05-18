@@ -107,6 +107,9 @@ dmypy.json
 
 # Docker
 
+# local .env files
+.env
+
 # docker-compose overrides
 *.override.yml
 

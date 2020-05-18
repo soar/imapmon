@@ -33,6 +33,7 @@ class IMAPClient:
 
     def update(self):
         for msg in self.mailbox.fetch(Q(seen=False)):
-            logger.info('Found new message with ID: %s', msg.uid)
+            logger.info('Found new message with ID: `%s`, from: `%s`', msg.uid, msg.from_)
+            logger.debug(' ... subject: `%s`, date: `%s`', msg.subject, msg.date_str)
             for _, channel in self.channels.items():
                 channel.message(msg)

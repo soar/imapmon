@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import logging
 import os
 import sys
 import time
@@ -10,6 +11,8 @@ from dotenv import find_dotenv, load_dotenv
 from imapmon.imap import IMAPClient
 from imapmon.settings import Settings
 
+
+logger = logging.getLogger(__name__)
 sys.path.append(os.getcwd())
 dotenv_file = find_dotenv(usecwd=True)
 if dotenv_file:
@@ -59,9 +62,18 @@ if dotenv_file:
     envvar='TELEGRAM_CHAT_ID',
     help='Telegram Chat ID (channel ID, group ID or @username)'
 )
+@click.option(
+    '--log-level', '-l',
+    'log_level',
+    envvar='LOG_LEVEL',
+    type=click.Choice(logging._nameToLevel.keys()),  # noqa
+    help='Log level for console messages'
+)
 def run(**kwargs):
     settings = Settings(**kwargs)
     m = IMAPClient(settings)
+
+    logger.info('App started, version: %s', settings.version)
 
     while True:
         m.update()
