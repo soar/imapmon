@@ -39,7 +39,7 @@ if dotenv_file:
     'imap_password',
     envvar='IMAP_PASSWORD',
     required=True,
-    help='IMAP password'
+    help='IMAP password/key/token'
 )
 @click.option(
     '--channel', '-c',

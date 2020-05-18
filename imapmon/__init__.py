@@ -1,11 +1,16 @@
 import logging.config
-import pathlib
 import yaml
+from pathlib import Path
 
 
-logging.config.dictConfig(
-    yaml.load(
-        pathlib.Path('imapmon/logger.yml').read_text(encoding='utf-8'),
-        Loader=yaml.FullLoader
-    )
-)
+if not Path('.').rglob('logger.yml'):
+    logging.warning('Logging configuration file not found')
+else:
+    for logger_config in Path('.').rglob('logger.yml'):
+        logging.debug('Loading configuration file: ', logger_config)
+        logging.config.dictConfig(
+            yaml.load(
+                logger_config.read_text(encoding='utf-8'),
+                Loader=yaml.FullLoader
+            )
+        )
