@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+
+  app:
+
+    build:
+      context: .
+
+    environment:
+      IMAP_HOSTNAME: imap.example.com
+      IMAP_USERNAME: email@example.com
+      IMAP_PASSWORD: qwerty123
+
+      CHANNELS: telegram
+
+      TELEGRAM_BOT_TOKEN: 1234567890:EtneWwZtnEibpH6WZVsnZimbPXZLRurw
+      TELEGRAM_CHAT_ID: 12345678
+
+    image: soar/imapmon:latest
+
+    restart: unless-stopped
