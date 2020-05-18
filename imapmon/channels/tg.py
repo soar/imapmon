@@ -35,6 +35,7 @@ class TelegramChannel(BaseChannel):
 
         telegram_msg = (
             f'*Mailbox:* `{self.settings.imap_username}`\n'
+            f'*From:* `{self.clean_string(msg.from_)}`\n'
             f'*Subject:* `{self.clean_string(msg.subject)}`\n'
             f'*Text:*\n'
             f'```\n{self.clean_string(message_body)}\n```'
