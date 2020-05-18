@@ -4,16 +4,17 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+logging-tree = "*"
 prospector = {extras = ["with_everything"],version = "*"}
 pyflakes = "*"
-logging-tree = "*"
 
 [packages]
+beautifulsoup4 = "*"
 click = "*"
+imap-tools = "*"
 python-dotenv = "*"
 python-telegram-bot = "*"
-beautifulsoup4 = "*"
-imap-tools = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.7"

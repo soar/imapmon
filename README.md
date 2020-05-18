@@ -1,5 +1,12 @@
 # IMAP Mon
 
+![PyPI - License](https://img.shields.io/pypi/l/imapmon)
+![🐍 CI](https://github.com/soar/imapmon/workflows/%F0%9F%90%8D%20CI/badge.svg?branch=master)
+![PyPI - Implementation](https://img.shields.io/pypi/implementation/imapmon)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/imapmon)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/imapmon)
+![GitHub last commit](https://img.shields.io/github/last-commit/soar/imapmon)
+
 Tool for monitoring IMAP mailboxes and retransmitting received emails via alternative channels
 
 ## Quick start
@@ -40,4 +47,13 @@ Some options can be set via an environment variable (real or [dotenv](https://gi
     export IMAP_USERNAME=user@example.com
     export IMAP_PASSWORD=qwerty123
     CHANNELS=telegram TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=123 imapmon
+    ```
+3. Run using a pre-built Docker image:
+    ```bash
+    docker run --rm -it \
+        docker.pkg.github.com/soar/imapmon/imapmon:latest \
+        --hostname imap.example.com \
+        -u user@example.com \
+        -p qwerty123 \
+        ...
     ```
