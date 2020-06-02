@@ -31,7 +31,10 @@ class TelegramChannel(BaseChannel):
         return string.replace('`', "'")
 
     def message(self, msg: MailMessage):
-        message_body: str = BeautifulSoup(msg.html, 'html.parser').get_text('\n', strip=True)
+        if msg.html and len(msg.html) > len(msg.text):
+            message_body: str = BeautifulSoup(msg.html, 'html.parser').get_text('\n', strip=True)
+        else:
+            message_body: str = msg.text
 
         telegram_msg = (
             f'*Mailbox:* `{self.settings.imap_username}`\n'
