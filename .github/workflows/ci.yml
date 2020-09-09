@@ -31,7 +31,7 @@ jobs:
           python -m pipenv install --system --deploy --dev
 
       - name: Run prospector
-        run: prospector
+        run: prospector --include-tool-stdout
 
   publish-package:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
