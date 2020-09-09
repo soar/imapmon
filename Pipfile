@@ -5,7 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 logging-tree = "*"
-prospector = {extras = ["with_everything"],version = "*"}
+prospector = {extras = ["with_everything"],version = "==1.3.1.dev1"}
 pyflakes = "*"
 
 [packages]
