@@ -69,6 +69,12 @@ if dotenv_file:
     type=click.Choice(logging._nameToLevel.keys()),  # noqa
     help='Log level for console messages'
 )
+@click.option(
+    '--sentry-dsn',
+    'sentry_dsn',
+    envvar='SENTRY_DSN',
+    help='Sentry DSN (see: sentry.io)'
+)
 def run(**kwargs):
     settings = Settings(**kwargs)
     m = IMAPClient(settings)

@@ -15,6 +15,7 @@ imap-tools = "*"
 python-dotenv = "*"
 python-telegram-bot = "*"
 pyyaml = "*"
+sentry-sdk = "*"
 
 [requires]
 python_version = "3.7"
