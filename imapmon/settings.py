@@ -23,7 +23,9 @@ class Settings:
     log_level: Union[str, None] = None
 
     def __post_init__(self):
-        logging.getLogger().setLevel(self.log_level)
+        if self.log_level:
+            logging.getLogger().setLevel(self.log_level)
+
         self.version = Path('version.txt').read_text().strip()
 
         if self.sentry_dsn:

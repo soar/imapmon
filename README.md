@@ -29,6 +29,7 @@ Some options can be set via an environment variable (real or [dotenv](https://gi
 | `CHANNELS` | `--channel`/`-c` | ☑️ | Channel to retransmit messages |
 | `TELEGRAM_BOT_TOKEN` | `--telegram-bot-token` | ☑️/✖️ | Telegram Bot Token |
 | `TELEGRAM_CHAT_ID` | `--telegram-chat-id` | ☑️/✖️ | Telegram Chat ID (channel ID, group ID or @username) |
+| `SENTRY_DSN` | `--sentry-dsn` | ✖️ | Sentry DSN |
 | `LOG_LEVEL` | `--log-level`/`-l` | ✖️ | Log level for console messages |
 
 ## Examples
