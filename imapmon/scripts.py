@@ -90,7 +90,7 @@ def run(scan_interval: int, **kwargs):
     while True:
         m.update()
 
-        logger.debug(f'Sleeping for {scan_interval} seconds...')
+        logger.debug('Sleeping for %d seconds...', scan_interval)
         time.sleep(scan_interval)
 
 
