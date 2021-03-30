@@ -1,4 +1,5 @@
 import logging
+import re
 import typing
 
 from click import BadOptionUsage
@@ -23,6 +24,8 @@ class IMAPClient:
         self.mailbox = MailBox(self.settings.imap_hostname)
         self.mailbox.login(self.settings.imap_username, self.settings.imap_password)
 
+        self.spam_filters = [re.compile(spam_filter) for spam_filter in settings.spam_filters]
+
         self.channels: typing.Dict[str, BaseChannel] = {}
         for channel_name in settings.channels:
             channel_class = self.CHANNELS.get(channel_name)
@@ -35,5 +38,11 @@ class IMAPClient:
         for msg in self.mailbox.fetch(A(seen=False), limit=7):
             logger.info('Found new message with ID: `%s`, from: `%s`', msg.uid, msg.from_)
             logger.debug(' ... subject: `%s`, date: `%s`', msg.subject, msg.date_str)
-            for _, channel in self.channels.items():
-                channel.message(msg)
+
+            for spam_filter in self.spam_filters:
+                if spam_filter.match(msg.from_) or spam_filter.match(msg.subject):
+                    logger.info(' ... skipping based on the filter rule: "%s"', spam_filter.pattern)
+                    break
+            else:
+                for _, channel in self.channels.items():
+                    channel.message(msg)

@@ -17,6 +17,8 @@ class Settings:
 
     channels: list
 
+    spam_filters: list
+
     telegram_bot_token: Union[str, None] = None
     telegram_chat_id: Union[str, None] = None
 

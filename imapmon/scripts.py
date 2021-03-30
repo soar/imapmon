@@ -52,6 +52,13 @@ if dotenv_file:
     help='Channel to retransmit messages'
 )
 @click.option(
+    '--spam-filter',
+    'spam_filters',
+    multiple=True,
+    type=str,
+    help='Strings to filter messages'
+)
+@click.option(
     '--telegram-bot-token',
     'telegram_bot_token',
     envvar='TELEGRAM_BOT_TOKEN',
