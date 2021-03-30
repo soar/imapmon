@@ -2,7 +2,7 @@ import logging
 import typing
 
 from click import BadOptionUsage
-from imap_tools import MailBox, Q
+from imap_tools import MailBox, A
 
 from imapmon.channels.base import BaseChannel
 from imapmon.channels.tg import TelegramChannel
@@ -32,7 +32,7 @@ class IMAPClient:
                 raise BadOptionUsage('channel', f'Channel {channel_name} is not defined')
 
     def update(self):
-        for msg in self.mailbox.fetch(Q(seen=False)):
+        for msg in self.mailbox.fetch(A(seen=False), limit=7):
             logger.info('Found new message with ID: `%s`, from: `%s`', msg.uid, msg.from_)
             logger.debug(' ... subject: `%s`, date: `%s`', msg.subject, msg.date_str)
             for _, channel in self.channels.items():
