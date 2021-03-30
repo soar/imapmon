@@ -108,7 +108,3 @@ def run(scan_interval: int, push_test_url: str, **kwargs):
 
         logger.debug('Sleeping for %d seconds...', scan_interval)
         time.sleep(scan_interval)
-
-
-if __name__ == '__main__':
-    run(auto_envvar_prefix='IMAPMON')  # pylint: disable=no-value-for-parameter

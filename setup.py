@@ -17,7 +17,7 @@ setup(
     keywords=['imap', 'telegram'],
     entry_points={
         'console_scripts': [
-            'imapmon = imapmon.scripts:run'
+            'imapmon = imapmon.__main__:main'
         ]
     },
     classifiers=[
