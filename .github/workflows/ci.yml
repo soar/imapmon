@@ -44,10 +44,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Set up Python 3.7
+      - name: Set up Python 3.8
         uses: actions/setup-python@master
         with:
-          python-version: 3.7
+          python-version: 3.8
 
       # TODO: add `pyproject.toml` according to PEP 517/PEP 518
       # - name: Install pep517
