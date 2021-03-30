@@ -6,6 +6,7 @@ import sys
 import time
 
 import click
+import requests
 from dotenv import find_dotenv, load_dotenv
 
 from imapmon.imap import IMAPClient
@@ -81,7 +82,11 @@ if dotenv_file:
     default=30,
     help='Time between checks (seconds)'
 )
-def run(scan_interval: int, **kwargs):
+@click.option(
+    '--push-test-url',
+    help='URL to ping while running, can be used for passive monitoring'
+)
+def run(scan_interval: int, push_test_url: str, **kwargs):
     settings = Settings(**kwargs)
     m = IMAPClient(settings)
 
@@ -89,6 +94,10 @@ def run(scan_interval: int, **kwargs):
 
     while True:
         m.update()
+
+        if push_test_url:
+            resp = requests.get(push_test_url)
+            logger.debug('Push test URL response: [%s] %s', resp.status_code, resp.text[:64])
 
         logger.debug('Sleeping for %d seconds...', scan_interval)
         time.sleep(scan_interval)
