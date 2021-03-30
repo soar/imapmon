@@ -1,7 +1,13 @@
 name: 🐍 CI
 on:
   pull_request:
+    branches:
+      - 'master'
   push:
+    branches:
+      - '**'
+    tags:
+      - 'v*.*.*'
   schedule:
     - cron: '7 1 * * 0'
 
