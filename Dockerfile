@@ -1,5 +1,7 @@
 FROM python:3.7-alpine
 
+LABEL org.opencontainers.image.source=https://github.com/soar/imapmon
+
 RUN mkdir -p /app \
  && addgroup -g 1000 app \
  && adduser -u 1000 -G app -s /bin/sh -D app
