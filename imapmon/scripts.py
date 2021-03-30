@@ -75,7 +75,13 @@ if dotenv_file:
     envvar='SENTRY_DSN',
     help='Sentry DSN (see: sentry.io)'
 )
-def run(**kwargs):
+@click.option(
+    '--scan-interval',
+    type=int,
+    default=30,
+    help='Time between checks (seconds)'
+)
+def run(scan_interval: int, **kwargs):
     settings = Settings(**kwargs)
     m = IMAPClient(settings)
 
@@ -83,7 +89,9 @@ def run(**kwargs):
 
     while True:
         m.update()
-        time.sleep(10)
+
+        logger.debug(f'Sleeping for {scan_interval} seconds...')
+        time.sleep(scan_interval)
 
 
 if __name__ == '__main__':
