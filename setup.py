@@ -1,11 +1,5 @@
-import os
 from pathlib import Path
 from setuptools import setup, find_namespace_packages
-
-
-def read(fname):
-    with open(os.path.join(os.path.dirname(__file__), fname)) as f:
-        return f.read()
 
 
 setup(
@@ -18,7 +12,7 @@ setup(
     author='soar',
     author_email='i@soar.name',
     description='Tool for monitoring IMAP mailboxes and retransmitting received emails via alternative channels',
-    long_description=read('README.md'),
+    long_description=Path('README.md').read_text(encoding='utf-8'),
     long_description_content_type='text/markdown',
     keywords=['imap', 'telegram'],
     entry_points={
