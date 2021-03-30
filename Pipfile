@@ -4,8 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+flake8 = "==3.8.4"
 logging-tree = "*"
-prospector = {extras = ["with_everything"],version = "==1.3.1.dev1"}
+prospector = {extras = ["with_everything"],version = "==1.3.1"}
 pyflakes = "*"
 
 [packages]
@@ -16,6 +17,7 @@ python-dotenv = "*"
 python-telegram-bot = "*"
 pyyaml = "*"
 sentry-sdk = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"

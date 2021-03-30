@@ -11,6 +11,7 @@ class TelegramChannel(BaseChannel):
 
     def __init__(self, settings: Settings):
         super().__init__(settings)
+        assert isinstance(settings.telegram_bot_token, str)
         self.bot = Bot(settings.telegram_bot_token)
 
     def check_settings(self):

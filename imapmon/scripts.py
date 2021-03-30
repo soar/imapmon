@@ -95,4 +95,4 @@ def run(scan_interval: int, **kwargs):
 
 
 if __name__ == '__main__':
-    run()
+    run(auto_envvar_prefix='IMAPMON')  # pylint: disable=no-value-for-parameter
