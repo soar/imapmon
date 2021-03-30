@@ -27,8 +27,9 @@ class TelegramChannel(BaseChannel):
             )
 
     @staticmethod
-    def clean_string(string: str):
-        return string.replace('`', "'")
+    def clean_string(s: str, max_length: int = 2048):
+        s = s.replace('`', "'")
+        return s if len(s) <= max_length else s[:max_length] + "..."
 
     def message(self, msg: MailMessage):
         message_body: str
@@ -39,8 +40,8 @@ class TelegramChannel(BaseChannel):
 
         telegram_msg = (
             f'*Mailbox:* `{self.settings.imap_username}`\n'
-            f'*From:* `{self.clean_string(msg.from_)}`\n'
-            f'*Subject:* `{self.clean_string(msg.subject)}`\n'
+            f'*From:* `{self.clean_string(msg.from_, 512)}`\n'
+            f'*Subject:* `{self.clean_string(msg.subject, 512)}`\n'
             f'*Text:*\n'
             f'```\n{self.clean_string(message_body)}\n```'
         )
