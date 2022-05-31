@@ -2,8 +2,9 @@ name: 🐍 CI
 on:
   pull_request:
   push:
-  schedule:
-    - cron: '7 1 * * 0'
+    branches:
+      - master
+  workflow_dispatch:
 
 jobs:
 
