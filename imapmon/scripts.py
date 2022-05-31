@@ -48,7 +48,7 @@ if dotenv_file:
     envvar='CHANNELS',
     required=True,
     multiple=True,
-    type=click.Choice(IMAPClient.CHANNELS.keys()),
+    type=click.Choice(list(IMAPClient.CHANNELS.keys())),
     help='Channel to retransmit messages'
 )
 @click.option(
