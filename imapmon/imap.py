@@ -21,7 +21,7 @@ class IMAPClient:
 
     def __init__(self, settings: Settings):
         self.settings = settings
-        self.mailbox = MailBox(self.settings.imap_hostname)
+        self.mailbox = MailBox(self.settings.imap_hostname, timeout=60)
         self.mailbox.login(self.settings.imap_username, self.settings.imap_password)
 
         self.spam_filters = [re.compile(spam_filter) for spam_filter in settings.spam_filters]
